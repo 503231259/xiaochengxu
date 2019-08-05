@@ -15,134 +15,45 @@
       <div class="item">
         <!-- 店铺名称 -->
         <div class="shopname">优购生活馆</div>
-        <div class="goods">
+        <div
+        class="goods"
+        v-for="(item, index1) in listOfGoods"
+        :key="item.id"
+        >
           <!-- 商品图片 -->
-          <image class="pic" src="/static/uploads/goods_1.jpg"></image>
+          <image class="pic" :src="item.pic"></image>
           <!-- 商品信息 -->
           <div class="meta">
-            <p class="name">【海外购自营】黎珐(ReFa) MTG日本 CARAT铂金微电流瘦脸瘦身提拉紧致V脸美容仪 【保税仓发货】</p>
-            <p class="price"><span>￥</span>1399<span>.00</span></p>
+            <p class="name">{{item.name}}</p>
+            <p class="price"><span>￥</span>{{item.price}}<span>.00</span></p>
             <!-- 加减 -->
             <div class="amount">
-              <span class="reduce">-</span>
-              <input type="number" value="1" class="number">
-              <span class="plus">+</span>
+              <span class="reduce" @click="addHandle(-1, index1)">-</span>
+              <input type="number" :value="item.count" class="number">
+              <span class="plus" @click="addHandle(1, index1)">+</span>
             </div>
           </div>
           <!-- 选框 -->
           <span class="checkbox">
-            <icon type="success" size="20" color="#ea4451"></icon>
-          </span>
-        </div>
-        <div class="goods">
-          <!-- 商品图片 -->
-          <image class="pic" src="/static/uploads/goods_2.jpg"></image>
-          <!-- 商品信息 -->
-          <div class="meta">
-            <p class="name">【海外购自营】黎珐(ReFa) MTG日本 CARAT铂金微电流瘦脸瘦身提拉紧致V脸美容仪 【保税仓发货】</p>
-            <p class="price"><span>￥</span>1399<span>.00</span></p>
-            <!-- 加减 -->
-            <div class="amount">
-              <span class="reduce">-</span>
-              <input type="number" value="1" class="number">
-              <span class="plus">+</span>
-            </div>
-          </div>
-          <!-- 选框 -->
-          <span class="checkbox">
-            <icon type="success" size="20" color="#ea4451"></icon>
-          </span>
-        </div>
-        <div class="goods">
-          <!-- 商品图片 -->
-          <image class="pic" src="/static/uploads/goods_5.jpg"></image>
-          <!-- 商品信息 -->
-          <div class="meta">
-            <p class="name">【海外购自营】黎珐(ReFa) MTG日本 CARAT铂金微电流瘦脸瘦身提拉紧致V脸美容仪 【保税仓发货】</p>
-            <p class="price"><span>￥</span>1399<span>.00</span></p>
-            <!-- 加减 -->
-            <div class="amount">
-              <span class="reduce">-</span>
-              <input type="number" value="1" class="number">
-              <span class="plus">+</span>
-            </div>
-          </div>
-          <!-- 选框 -->
-          <span class="checkbox">
-            <icon type="success" size="20" color="#ccc"></icon>
+            <icon
+            type="success"
+            size="20"
+            :color="item.ifTheSelected ? '#ea4451' : '#ccc'"
+            @click="changeTheSelected(index1)"
+            ></icon>
           </span>
         </div>
       </div>
-      <div class="item">
-        <!-- 店铺名称 -->
-        <div class="shopname">优购生活馆</div>
-        <div class="goods">
-          <!-- 商品图片 -->
-          <image class="pic" src="/static/uploads/goods_1.jpg"></image>
-          <!-- 商品信息 -->
-          <div class="meta">
-            <p class="name">【海外购自营】黎珐(ReFa) MTG日本 CARAT铂金微电流瘦脸瘦身提拉紧致V脸美容仪 【保税仓发货】</p>
-            <p class="price"><span>￥</span>1399<span>.00</span></p>
-            <!-- 加减 -->
-            <div class="amount">
-              <span class="reduce">-</span>
-              <input type="number" value="1" class="number">
-              <span class="plus">+</span>
-            </div>
-          </div>
-          <!-- 选框 -->
-          <span class="checkbox">
-            <icon type="success" size="20" color="#ccc"></icon>
-          </span>
-        </div>
-        <div class="goods">
-          <!-- 商品图片 -->
-          <image class="pic" src="/static/uploads/goods_2.jpg"></image>
-          <!-- 商品信息 -->
-          <div class="meta">
-            <p class="name">【海外购自营】黎珐(ReFa) MTG日本 CARAT铂金微电流瘦脸瘦身提拉紧致V脸美容仪 【保税仓发货】</p>
-            <p class="price"><span>￥</span>1399<span>.00</span></p>
-            <!-- 加减 -->
-            <div class="amount">
-              <span class="reduce">-</span>
-              <input type="number" value="2" class="number">
-              <span class="plus">+</span>
-            </div>
-          </div>
-          <!-- 选框 -->
-          <span class="checkbox">
-            <icon type="success" size="20" color="#ea4451"></icon>
-          </span>
-        </div>
-        <div class="goods">
-          <!-- 商品图片 -->
-          <image class="pic" src="/static/uploads/goods_5.jpg"></image>
-          <!-- 商品信息 -->
-          <div class="meta">
-            <p class="name">【海外购自营】黎珐(ReFa) MTG日本 CARAT铂金微电流瘦脸瘦身提拉紧致V脸美容仪 【保税仓发货】</p>
-            <p class="price"><span>￥</span>1399<span>.00</span></p>
-            <!-- 加减 -->
-            <div class="amount">
-              <span class="reduce">-</span>
-              <input type="number" value="1" class="number">
-              <span class="plus">+</span>
-            </div>
-          </div>
-          <!-- 选框 -->
-          <span class="checkbox">
-            <icon type="success" size="20" color="#ccc"></icon>
-          </span>
-        </div>
-      </div>
+
     </div>
     <!-- 其它 -->
     <div class="extra">
-      <label class="checkall">
-        <icon type="success" color="#ccc" size="20"></icon>
+      <label class="checkall" @click="allState" >
+        <icon type="success" :color="selectedGoods.length ===listOfGoods.length ? '#ea4451' : '#ccc'" size="20"></icon>
         全选
       </label>
       <div class="total">
-        合计: <span>￥</span><label>14110</label><span>.00</span>
+        合计: <span>￥</span><label>{{theTotalAmount}}</label><span>.00</span>
       </div>
       <div class="pay">结算(3)</div>
     </div>
@@ -359,6 +270,74 @@
 
 <script>
   export default {
-    
+    data () {
+      return {
+        listOfGoods: []
+      }
+    },
+
+    methods: {
+      addHandle (num, index) {
+        
+        
+        // this.calculateTheNumber += num
+        // 如果商品数量小于等于1,则等于1
+        if(num === -1 && this.listOfGoods[index].count <= 1) {
+          this.listOfGoods[index].count = 1
+          mpvue.showToast({
+            title: '数量最少为 1',
+            icon : 'none'
+          })
+          return
+        }
+        this.listOfGoods[index].count += num
+      },
+
+      // 改变单个商品选中状态
+      changeTheSelected (index) {
+        this.listOfGoods[index].ifTheSelected = !this.listOfGoods[index].ifTheSelected
+        // console.log(this.selectedGoods)
+      },
+
+      // 全选状态
+      allState () {
+        this.listOfGoods.forEach((item) => {
+          item.ifTheSelected = true
+        })
+      }
+    },
+
+    computed: {
+      // 把选中的商品挑出来
+      selectedGoods () {
+        return this.listOfGoods.filter((item) => {
+          if(item.ifTheSelected) {
+            return item
+          }
+        })
+      },
+
+      // 总金额
+      theTotalAmount () {
+        // 定义一个总价格
+        let a = 0
+        // 循环选中的商品
+        this.selectedGoods.forEach((item) =>{
+          // 总价格 = 每个商品的个数 * 单价
+          a += item.count * item.price
+        })
+        return a
+      }
+    },
+
+    // 生命周期
+    mounted () {
+      // 获取locaStorage,展示在页面中
+      let data = mpvue.getStorageSync('commodityInformation')
+      // console.log(data)
+      // 存储在data数据里
+      this.listOfGoods = data
+      // console.log(this.listOfGoods)
+    }
   }
 </script>

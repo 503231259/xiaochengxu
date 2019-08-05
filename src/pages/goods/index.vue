@@ -163,6 +163,7 @@
 <script>
   // 引入请求
   import request from '@/utils/request.js'
+  import sleep from '@/utils/sleep.js'
 
   export default {
     data () {
@@ -194,7 +195,7 @@
       },
 
       // 加入购物车
-      addToCart () {
+      async addToCart () {
         // 创建变量,区别是否操作过相同的id+1的情况
         let isId = false
         // 1    读取本地存储看有没有值  ||  本地存储没有值就创建数组
@@ -226,6 +227,8 @@
               price: this.dataData.goods_price,
               // 商品图片
               pic: this.dataData.pics[0].pics_sma,
+              // 是否被选中
+              ifTheSelected: true,
               // 商品数量
               count: 1
             })
@@ -238,6 +241,14 @@
         mpvue.showToast({
           title: '添加成功'
         })
+        
+        // 停止2秒
+        await sleep(1.5)
+
+        // 跳转到购物车页面
+        mpvue.switchTab({
+          url: '/pages/cart/main'
+        })
       }
     },
 
@@ -246,7 +257,7 @@
     // 生命周期
     // onLoad 可以获取url携带的数据
     async onLoad (data) {
-      console.log(data.id)
+      // console.log(data.id)
       // url传的数据赋值
       this.parameterId = +data.id
       await this.requestData()

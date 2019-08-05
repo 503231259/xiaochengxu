@@ -83,7 +83,7 @@
         let data = await request(canshu)
         // console.log(data)
         this.listData = data.message
-        console.log(this.listData)
+        // console.log(this.listData)
       },
 
       // 点击获取点击状态

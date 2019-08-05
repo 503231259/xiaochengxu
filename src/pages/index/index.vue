@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    <div class="topFanhui" @click="handleTop" v-show="scrollTopData > 100">顶部</div>
   </div>
 </template>
 
@@ -62,7 +63,9 @@
         // 导航条数据
         NavigationBardata: [],
         // 楼层数据
-        floordata: []
+        floordata: [],
+        // 滚动刷新的值
+        scrollTopData: 0
       }
     },
     components: {
@@ -98,8 +101,15 @@
           url: '/api/public/v1/home/floordata'
         }
         const { message } = await request(canshu)
-        console.log(message)
+        // console.log(message)
         this.floordata = message
+      },
+
+      // 回到顶部
+      handleTop () {
+        wx.pageScrollTo({
+          scrollTop: 0
+        })
       }
     },
     created () {
@@ -111,6 +121,7 @@
       this.floorMethod()
     },
 
+    // 下拉刷新
     async onPullDownRefresh () {
       // 请求是异步操作,改成同步操作
       // 轮播图
@@ -121,6 +132,10 @@
       await this.floorMethod()
       // 停止下拉刷新
       mpvue.stopPullDownRefresh()
+    },
+    // 监视滚动页面
+    onPageScroll ({scrollTop}) {
+      this.scrollTopData = scrollTop
     }
   }
 </script>
@@ -178,6 +193,20 @@
         margin-right: 10rpx;
       }
     }
+  }
+
+  .topFanhui {
+    position: fixed;
+    right: 50rpx;
+    width: 100rpx;
+    height: 100rpx;
+    bottom: 50rpx;
+    border: 1rpx solid #ccc;
+    border-radius: 50%;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 100rpx;
+    opacity:0.5;
   }
 
 </style>
