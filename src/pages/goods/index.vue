@@ -35,7 +35,7 @@
     <div class="action">
       <button open-type="contact">联系客服</button>
       <span class="cart" @click="shoppingCar">购物车</span>
-      <span class="add">加入购物车</span>
+      <span class="add" @click="addToCart">加入购物车</span>
       <span class="buy">立即购买</span>
     </div>
     <!-- /操作 -->
@@ -191,8 +191,57 @@
         mpvue.switchTab({
           url: '/pages/cart/main'
         })
+      },
+
+      // 加入购物车
+      addToCart () {
+        // 创建变量,区别是否操作过相同的id+1的情况
+        let isId = false
+        // 1    读取本地存储看有没有值  ||  本地存储没有值就创建数组
+        let getStorageData = mpvue.getStorageSync('commodityInformation') || []
+        // console.log(getStorageData.length)
+        
+        if(getStorageData.length) {
+          getStorageData.forEach((item) => {
+            // 如果添加的ID是相同的id,那么数量+1
+            if(item.id === this.dataData.goods_id) {
+              // 添加过相同的商品,那么isId为true
+              isId = true
+              // 相同的商品数量 +1
+              return item.count += 1
+            }
+          })
+        }
+        // console.log(getStorageData)
+        
+          // 2    添加点击的商品信息
+          // 如果没有添加相同的商品
+          if(!isId){
+            getStorageData.push({
+              // 商品ID
+              id: this.dataData.goods_id,
+              // 商品name
+              name: this.dataData.goods_name,
+              // 商品价格
+              price: this.dataData.goods_price,
+              // 商品图片
+              pic: this.dataData.pics[0].pics_sma,
+              // 商品数量
+              count: 1
+            })
+          }
+        // console.log(getStorageData)
+        // 3    把修改后的数据存放到本地存储里
+        mpvue.setStorageSync('commodityInformation', getStorageData)
+
+        // 提示用户信息添加成功
+        mpvue.showToast({
+          title: '添加成功'
+        })
       }
     },
+
+    
 
     // 生命周期
     // onLoad 可以获取url携带的数据
